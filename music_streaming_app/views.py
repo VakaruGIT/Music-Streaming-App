@@ -56,7 +56,6 @@ def profile(request):
             'email': user.email,
             'name': user.name,
             'bio': user.bio,
-            'profile_picture': user.profile_picture,
         })
     return render(request, 'user_profile.html', {'form': form, 'user': user})
 
