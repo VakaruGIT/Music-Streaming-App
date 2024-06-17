@@ -37,9 +37,7 @@ class UserUpdateForm(forms.ModelForm):
         fields = ("name", "bio", "profile_picture","email")
 
 
-
-
 class MusicTrackForm(forms.ModelForm):
     class Meta:
         model = MusicTrack
-        fields = ("title","artist","genre","audio_file")
+        fields = ("title","genre", "audio_file")

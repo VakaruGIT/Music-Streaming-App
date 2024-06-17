@@ -11,18 +11,18 @@ by Andrei-Flavius Văcaru
 ## Features
 - User authentication (done)
 - User registration (done)
+- User can either choose if it is an artist or not (done)
 - User can login (done)
 - User profile (done)
-- Song Page where all songs are displayed (done) just need to test it
-- User edit profile # DONE
+- Song Page where all songs are displayed (done) 
+- User edit profile (done)
 
 
-- User can look for songs
-- User can listen to songs
-- User can either choose if it is an artist or not
-- Artist can upload songs
-- Artist can delete songs
-- Artist can update songs
+- User can look for songs (done)
+- User can listen to songs (done)
+- Artist can upload songs (done)
+- Artist can delete songs (done)
+- Artist can update songs (done)
 
 ## Access to the app with the following credentials
 
