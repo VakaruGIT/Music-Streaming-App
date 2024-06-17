@@ -30,11 +30,9 @@ class UserRegistrationForm(UserCreationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
-    email = forms.EmailField()
-
     class Meta:
         model = User
-        fields = ("name", "bio", "profile_picture","email")
+        fields = ('username', 'email', 'name', 'bio', 'profile_picture')
 
 
 class MusicTrackForm(forms.ModelForm):

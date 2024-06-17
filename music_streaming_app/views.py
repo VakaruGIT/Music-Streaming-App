@@ -43,7 +43,7 @@ def home_page(request): # DONE
     return render(request, "home-page.html", {"music_tracks": music_tracks})
 
 @login_required
-def profile(request): # DONE
+def profile(request):
     user = get_user_model().objects.get(username=request.user.username)
     if request.method == 'POST':
         form = UserUpdateForm(request.POST, instance=user)
@@ -51,19 +51,15 @@ def profile(request): # DONE
             form.save()
             return redirect('profile')
     else:
-        form = UserUpdateForm(instance=user)
-    return render(request, 'user_profile.html', {'form': form})
+        form = UserUpdateForm(instance=user, initial={
+            'username': user.username,
+            'email': user.email,
+            'name': user.name,
+            'bio': user.bio,
+            'profile_picture': user.profile_picture,
+        })
+    return render(request, 'user_profile.html', {'form': form, 'user': user})
 
-# def update_profile(request): #DONE
-#     user = get_user_model().objects.get(username=request.user.username)
-#     if request.method == 'POST':
-#         form = UserUpdateForm(request.POST, instance=user)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('profile')
-#     else:
-#         form = UserUpdateForm(instance=user)
-#     return render(request, 'user_profile.html', {'form': form})
 
 def upload_music_track(request): # DONE
     if request.method == 'POST':
@@ -83,7 +79,7 @@ def music_page(request): # DONE
     return render(request, 'music_page.html', {'music_tracks': music_tracks})
 
 
-def music_edit(request, music_track_id):
+def music_edit(request, music_track_id): # DONE
     music_track = MusicTrack.objects.get(id=music_track_id)
     if request.method == 'POST':
         form = MusicTrackForm(request.POST, request.FILES, instance=music_track)
@@ -94,15 +90,15 @@ def music_edit(request, music_track_id):
         form = MusicTrackForm(instance=music_track)
     return render(request, 'music_edit.html', {'form': form, 'usic_track': music_track})
 
-def music_delete(request, music_track_id):
+def music_delete(request, music_track_id): # DONE
     music_track = MusicTrack.objects.get(id=music_track_id)
     music_track.delete()
     return redirect('music_page')
 
-def music_search_page(request):
+def music_search_page(request): # DONE
     return render(request, 'music_search.html')
 
-def music_search_results(request):
+def music_search_results(request): # DONE
     song_name = request.GET.get('song_name')
     artist_name = request.GET.get('artist_name')
     genre = request.GET.get('genre')
@@ -120,6 +116,3 @@ def music_search_results(request):
         messages.info(request, 'No music found with this information.')
 
     return render(request, 'music_search_results.html', {'songs': songs})
-
-
-
