@@ -6,7 +6,7 @@ from django.contrib.auth.models import Group
 class UserRegistrationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('username', 'name', 'bio', 'profile_picture', 'is_artist')
+        fields = ('username', 'name', 'bio', 'is_artist')
 
     def clean(self):
         cleaned_data = super().clean()
@@ -32,7 +32,7 @@ class UserRegistrationForm(UserCreationForm):
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('username', 'email', 'name', 'bio', 'profile_picture')
+        fields = ('username', 'email', 'name', 'bio')
 
 
 class MusicTrackForm(forms.ModelForm):
