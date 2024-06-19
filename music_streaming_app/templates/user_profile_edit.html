@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class="display-4 text-primary">Edit Profile</h1>
+                <a href="{% url "home-page" %}" class="btn btn-primary btn-lg mx-2">Home Page</a>
+                <a href="{% url "music_page" %}" class="btn btn-primary btn-lg mx-2">Music Page</a>
+                <a href="{% url "user_profile" %}" class="btn btn-primary btn-lg mx-2">User Profile</a>
+                <p class="lead">Edit your profile information:</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <h2 class="text-secondary">User Information:</h2>
+                            <div class="form-group">
+                                <label for="id_username" class="text-secondary">Username:</label>
+                                {{ form.username }}
+                            </div>
+                            <div class="form-group">
+                                <label for="id_email" class="text-secondary">Email:</label>
+                                {{ form.email }}
+                            </div>
+                            <div class="form-group">
+                                <label for="id_name" class="text-secondary">Name:</label>
+                                {{ form.name }}
+                            </div>
+                            <div class="form-group">
+                                <label for="id_bio" class="text-secondary">Bio:</label>
+                                <textarea class="form-control" id="id_bio" rows="3" name="bio" required>{{ form.bio }}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_is_artist" class="text-secondary">Is artist:</label>
+                                {{ form.is_artist }}
+                            </div>
+                            {% if form.errors %}
+                                <ul>
+                                    {% for field in form %}
+                                        {% if field.errors %}
+                                            <li>{{ field.label }}: {{ field.errors|join:", " }}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                            <button type="submit" class="btn btn-danger">Update Profile</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

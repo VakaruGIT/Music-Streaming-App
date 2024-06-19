@@ -25,8 +25,7 @@ SECRET_KEY = 'v3^*6p7ede#ke@q$9c-cui@f7c%5^6&yd2=ho24k4$1f&cg+yy'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"] # Read on the internet, this is not safe :(
 
 
 # Application definition
@@ -70,7 +69,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'music_streaming_assignment.wsgi.application'
-
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -120,10 +119,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
 AUTH_USER_MODEL = 'music_streaming_app.User'
+

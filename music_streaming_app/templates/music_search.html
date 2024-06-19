@@ -4,17 +4,23 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="card">
+                <div class="card bg-light shadow">
                     <div class="card-body">
-                        <h2 class="card-title">Search for Music</h2>
+                        <h2 class="card-title text-primary">Search for Music</h2>
                         <form method="get" action="{% url 'music_search_results' %}">
-                            <label for="song_name">Song Name:</label>
-                            <input type="text" id="song_name" name="song_name"><br><br>
-                            <label for="artist_name">Artist Name:</label>
-                            <input type="text" id="artist_name" name="artist_name"><br><br>
-                            <label for="genre">Genre:</label>
-                            <input type="text" id="genre" name="genre"><br><br>
-                            <button type="submit">Search</button>
+                            <div class="form-group">
+                                <label for="song_name" class="text-secondary">Song Name:</label>
+                                <input type="text" id="song_name" name="song_name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="artist_name" class="text-secondary">Artist Name:</label>
+                                <input type="text" id="artist_name" name="artist_name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="genre" class="text-secondary">Genre:</label>
+                                <input type="text" id="genre" name="genre" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Search</button>
                         </form>
                     </div>
                 </div>

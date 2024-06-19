@@ -1,41 +1,40 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block content %}
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
+            <div class="col-md-5">
+                <div class="card bg-light shadow">
                     <div class="card-body">
-                        <h2 class="card-title">Register</h2>
+                        <h2 class="card-title text-primary">Register</h2>
                         <form method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="form-group">
-                                <label for="id_username">Username:</label>
+                                <label for="id_username" class="text-secondary">Username:</label>
                                 {{ form.username }}
                             </div>
                             <div class="form-group">
-                                <label for="id_name">Name:</label>
+                                <label for="id_name" class="text-secondary">Name:</label>
                                 {{ form.name }}
                             </div>
                             <div class="form-group">
-                                <label for="id_bio">Bio:</label>
+                                <label for="id_bio" class="text-secondary">Bio:</label>
                                 {{ form.bio }}
                             </div>
                             <div class="form-group">
-                                <label for="id_is_artist">Is artist:</label>
+                                <label for="id_is_artist" class="text-secondary">Is artist:</label>
                                 {{ form.is_artist }}
                             </div>
                             <div class="form-group">
-                                <label for="id_password1">Password:</label>
+                                <label for="id_password1" class="text-secondary">Password:</label>
                                 {{ form.password1 }}
                             </div>
                             <div class="form-group">
-                                <label for="id_password2">Password confirmation:</label>
+                                <label for="id_password2" class="text-secondary">Password confirmation:</label>
                                 {{ form.password2 }}
                             </div>
-                            <button type="submit" class="btn btn-primary">Register</button>
-                            <a href="{% url 'login' %}">Login</a>
+                            <button type="submit" class="btn btn-primary btn-block">Register</button>
+                            <a href="{% url 'login' %}" class="text-secondary">Login</a>
                         </form>
                     </div>
                 </div>

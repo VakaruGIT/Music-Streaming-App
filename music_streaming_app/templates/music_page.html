@@ -4,29 +4,29 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="card">
+                <div class="card bg-light shadow">
                     <div class="card-body">
-                        <h2 class="card-title">All Songs</h2>
+                        <h2 class="card-title text-primary">All Songs</h2>
                         {% if user.is_authenticated and user.is_artist %}
-                            <a href="{% url 'music_upload' %}" class="btn btn-primary mb-3">Upload Song</a>
+                            <a href="{% url 'music_upload' %}" class="btn btn-primary btn-lg mx-2 mb-3">Upload Song</a>
                         {% endif %}
-                        <a href="{% url 'home-page' %}" class="btn btn-secondary mb-3">Home</a>
-                        <a href="{% url 'music_search' %}" class="btn btn-secondary mb-3">Search Songs</a>
-                        <ul>
+                        <a href="{% url 'home-page' %}" class="btn btn-secondary btn-lg mx-2 mb-3">Home</a>
+                        <a href="{% url 'music_search' %}" class="btn btn-secondary btn-lg mx-2 mb-3">Search Songs</a>
+                        <ul class="list-group">
                             {% for song in music_tracks %}
-                                <li>
+                                <li class="list-group-item">
                                     {{ song.title }} by {{ song.artist.name }} ({{ song.genre }})
                                     <audio preload="auto" controls>
                                       <source src="{{ song.audio_file.url }}">
                                       Your browser does not support the audio element.
                                     </audio>
                                     {% if song.artist == request.user or request.user.is_superuser %}
-                                        <a href="{% url 'music_edit' song.id %}" class="btn btn-secondary">Edit</a>
-                                        <a href="{% url 'music_delete' song.id %}" class="btn btn-danger">Delete</a>
+                                        <a href="{% url 'music_edit' song.id %}" class="btn btn-secondary btn-sm">Edit</a>
+                                        <a href="{% url 'music_delete' song.id %}" class="btn btn-danger btn-sm">Delete</a>
                                     {% endif %}
                                 </li>
                             {% empty %}
-                                <li>No songs found.</li>
+                                <li class="list-group-item text-secondary">No songs found.</li>
                             {% endfor %}
                         </ul>
                     </div>

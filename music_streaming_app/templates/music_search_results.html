@@ -4,27 +4,27 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="card">
+                <div class="card bg-light shadow">
                     <div class="card-body">
-                        <h2 class="card-title">Search Results</h2>
+                        <h2 class="card-title text-primary">Search Results</h2>
                         {% if songs %}
-                            <ul>
+                            <ul class="list-group">
                                 {% for song in songs %}
-                                    <li>
+                                    <li class="list-group-item">
                                         {{ song.title }} by {{ song.artist.name }} ({{ song.genre }})
                                         <audio preload="auto" controls>
                                           <source src="{{ song.audio_file.url }}">
                                           Your browser does not support the audio element.
                                         </audio>
                                         {% if song.artist == request.user %}
-                                            <a href="{% url 'music_edit' song.id %}" class="btn btn-secondary">Edit</a>
-                                            <a href="{% url 'music_delete' song.id %}" class="btn btn-danger">Delete</a>
+                                            <a href="{% url 'music_edit' song.id %}" class="btn btn-secondary btn-sm">Edit</a>
+                                            <a href="{% url 'music_delete' song.id %}" class="btn btn-danger btn-sm">Delete</a>
                                         {% endif %}
                                     </li>
                                 {% endfor %}
                             </ul>
                         {% else %}
-                            <p>No songs found.</p>
+                            <p class="text-secondary">No songs found.</p>
                         {% endif %}
                     </div>
                 </div>
