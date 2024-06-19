@@ -18,6 +18,8 @@ class User(AbstractUser):
         return self.username
 
 
+
+
 class MusicTrack(models.Model):
     title = models.CharField(max_length=100)
     artist = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tracks')
@@ -31,6 +33,29 @@ class MusicTrack(models.Model):
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
-        # Delete the audio file from the media folder
         default_storage.delete(self.audio_file.name)
+        super().delete(*args, **kwargs)
+
+class Playlist(models.Model):
+    name = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='playlists')
+    tracks = models.ManyToManyField(MusicTrack, related_name='playlists')
+
+    def __str__(self):
+        return f"{self.name} by {self.user.name}"
+
+    def add_track(self, track):
+        self.tracks.add(track)
+        self.save()
+
+    def remove_track(self, track):
+        self.tracks.remove(track)
+        self.save()
+
+    def clear(self):
+        self.tracks.clear()
+        self.save()
+
+    def delete(self, *args, **kwargs):
+        self.tracks.clear()
         super().delete(*args, **kwargs)

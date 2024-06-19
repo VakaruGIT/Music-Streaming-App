@@ -5,6 +5,8 @@ from django.contrib.auth import login as auth_login, authenticate, get_user_mode
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LogoutView
 from django.contrib import messages
+from django.dispatch import receiver
+from django.db.models.signals import post_delete
 
 # Create your views here.
 def register(request): # DONE
@@ -39,12 +41,10 @@ def home_page(request): # DONE
     music_tracks = MusicTrack.objects.all()
     return render(request, "home-page.html", {"music_tracks": music_tracks})
 
-@login_required
 def profile(request):
     user = request.user
     return render(request, "user_profile.html", {"user": user})
 
-@login_required
 def profile_edit(request):
     user = get_user_model().objects.get(username=request.user.username)
     if request.method == "POST":
@@ -61,7 +61,6 @@ def profile_edit(request):
         })
     return render(request, "user_profile_edit.html", {"form": form, "user": user})
 
-@login_required
 def edit_profile_redirect(request):
     return redirect("profile_edit")
 
@@ -121,3 +120,15 @@ def music_search_results(request): # DONE
         messages.info(request, "No music found with this information.")
 
     return render(request, "music_search_results.html", {"songs": songs})
+
+def playlist_page(request): # DONE
+    pass
+
+def playlist_create(request): # DONE
+    pass
+
+def playlist_edit(request): # DONE
+    pass
+
+def playlist_delete(request): # DONE
+    pass
