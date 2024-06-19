@@ -1,12 +1,9 @@
-from django.shortcuts import render, redirect
 from .forms import *
+from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login, authenticate, get_user_model
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LogoutView
-from django.contrib import messages
-from django.dispatch import receiver
-from django.db.models.signals import post_delete
+from django.urls import reverse
 
 # Create your views here.
 def register(request): # DONE
@@ -72,15 +69,15 @@ def upload_music_track(request): # DONE
             music_track = form.save(commit=False)
             music_track.artist = request.user
             music_track.save()
-            messages.success(request, "Music track uploaded successfully!")
             return redirect("music_page")
     else:
         form = MusicTrackForm()
     return render(request, "music_upload.html", {"form": form})
 
-def music_page(request): # DONE
+def music_page(request):
     music_tracks = MusicTrack.objects.all()
-    return render(request, "music_page.html", {"music_tracks": music_tracks})
+    playlists = Playlist.objects.filter(user=request.user)
+    return render(request, "music_page.html", {"music_tracks": music_tracks, "playlists": playlists})
 
 
 def music_edit(request, music_track_id): # DONE
@@ -116,19 +113,73 @@ def music_search_results(request): # DONE
     if genre:
         songs = songs.filter(genre__icontains=genre)
 
-    if not songs:
-        messages.info(request, "No music found with this information.")
-
     return render(request, "music_search_results.html", {"songs": songs})
 
-def playlist_page(request): # DONE
-    pass
+def playlists_page(request):
+    user = request.user
+    playlists = Playlist.objects.filter(user=user).order_by("-id")
+    return render(request, "playlists_page.html", {"playlists": playlists})
 
-def playlist_create(request): # DONE
-    pass
+def playlist_page(request, playlist_id):
+    current_playlist = Playlist.objects.get(id=playlist_id)
+    tracks = current_playlist.tracks.all()
+    return render(request, "playlist_page.html", {"current_playlist": current_playlist, "tracks": tracks})
 
-def playlist_edit(request): # DONE
-    pass
+def create_playlist(request):
+    if request.method == "POST":
+        name = request.POST["name"]
+        tracks = request.POST.getlist("tracks")
 
-def playlist_delete(request): # DONE
-    pass
+        playlist = Playlist.objects.create(name=name, user=request.user)
+
+        for track_id in tracks:
+            add_to_playlist(request, playlist.id, track_id)
+
+        return redirect("playlist_page", playlist_id=playlist.id)
+
+    music_tracks = MusicTrack.objects.all()
+    return render(request, "create_playlist.html", {"music_tracks": music_tracks})
+
+def edit_playlist(request, playlist_id):
+    playlist = Playlist.objects.get(id=playlist_id)
+    if request.method == "POST":
+        form = PlaylistUpdateForm(request.POST, instance=playlist)
+        if form.is_valid():
+            form.save()
+            tracks = request.POST.getlist("tracks")
+            playlist.tracks.clear()
+            for track_id in tracks:
+                track = MusicTrack.objects.get(id=track_id)
+                playlist.tracks.add(track)
+            return redirect("playlist_page", playlist_id=playlist.id)
+    else:
+        form = PlaylistUpdateForm(instance=playlist)
+        tracks = MusicTrack.objects.all()
+        playlist_tracks = playlist.tracks.all()
+    return render(request, "edit_playlist.html", {"form": form, "playlist": playlist, "tracks": tracks, "playlist_tracks": playlist_tracks})
+
+def remove_song_from_playlist(request, playlist_id, song_id):
+    playlist = Playlist.objects.get(id=playlist_id)
+    track = MusicTrack.objects.get(id=song_id)
+
+    playlist.tracks.remove(track)
+    return redirect("playlist_page", playlist_id=playlist_id)
+
+def add_to_playlist(request, playlist_id, song_id):
+    playlist = Playlist.objects.get(id=playlist_id)
+    track = MusicTrack.objects.get(id=song_id)
+
+    playlist.tracks.add(track)
+    return redirect("playlist_page", playlist_id=playlist_id)
+
+def delete_playlist(request, playlist_id):
+    try:
+        playlist_id = int(playlist_id)
+        playlist = Playlist.objects.get(id=playlist_id)
+        playlist.delete()
+        return redirect(reverse("playlists_page"))
+    except ValueError:
+        return redirect(reverse("playlists_page"))
+    except Playlist.DoesNotExist:
+        return redirect(reverse("playlists_page"))
+

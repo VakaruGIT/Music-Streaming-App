@@ -20,5 +20,11 @@ urlpatterns = [
     path('music/delete/<int:music_track_id>/', views.music_delete, name='music_delete'), # DONE
     path('music/search/', views.music_search_page, name='music_search'), # DONE
     path("music/search/results/", views.music_search_results, name="music_search_results"), # DONE
-
+    # PLAYLIST
+    path("playlists/", views.playlists_page, name="playlists_page"),  # DONE
+    path("playlists/create/", views.create_playlist, name="create_playlist"),  # DONE
+    path("playlists/<int:playlist_id>/", views.playlist_page, name="playlist_page"),  # DONE
+    path("playlists/<int:playlist_id>/edit/", views.edit_playlist, name="playlist_edit"),  # DONE
+    path("playlists/<int:playlist_id>/delete/", views.delete_playlist, name="playlist_delete"),  # DONE
+    path("add_to_playlist/<int:song_id>/", views.add_to_playlist, name="add_to_playlist"),  # DONE
 ]

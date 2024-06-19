@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class="display-4 text-primary">My Playlists</h1>
+                <a href="{% url "home-page" %}" class="btn btn-primary btn-lg mx-2">Home Page</a>
+                <a href="{% url "logout" %}" class="btn btn-danger btn-lg mx-2">Logout</a>
+                <div class="card bg-light shadow">
+                    <div class="card-body">
+                        <h2 class="card-title text-primary">My Playlists</h2>
+                        {% if playlists.count == 0 %}
+                            <p class="text-secondary">You don't have any playlists yet. Create a new playlist <a href="{% url 'create_playlist' %}" class="btn btn-primary btn-sm">here</a>.</p>
+                        {% else %}
+                            <ul class="list-group">
+                                {% for playlist in playlists %}
+                                    <li class="list-group-item">
+                                        <h2>{{ playlist.name }}</h2>
+                                        <p>{{ playlist.description }}</p>
+                                        <ul>
+                                            {% for song in playlist.tracks.all %}
+                                                <li>{{ song.title }} by {{ song.artist.name }} ({{ song.genre }})</li>
+                                            {% endfor %}
+                                        </ul>
+                                        <a href="{% url 'playlist_page' playlist.id %}" class="btn btn-primary btn-sm">View Playlist</a>
+                                        <a href="{% url 'playlist_edit' playlist.id %}" class="btn btn-secondary btn-sm">Edit</a>
+                                        <a href="{% url 'playlist_delete' playlist.id %}" class="btn btn-danger btn-sm">Delete</a>
+                                    </li>
+                              {% endfor %}
+                            </ul>
+                            <a href="{% url 'create_playlist' %}" class="btn btn-primary btn-lg">Create New Playlist</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

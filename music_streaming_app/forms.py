@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import User,MusicTrack
+from .models import User,MusicTrack,Playlist
 from django.contrib.auth.models import Group
 
 class UserRegistrationForm(UserCreationForm):
@@ -39,3 +39,13 @@ class MusicTrackForm(forms.ModelForm):
     class Meta:
         model = MusicTrack
         fields = ("title","genre", "audio_file")
+
+class PlaylistForm(forms.ModelForm):
+    class Meta:
+        model = Playlist
+        fields = ("name",)
+
+class PlaylistUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Playlist
+        fields = ("name",)

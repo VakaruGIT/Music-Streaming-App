@@ -8,7 +8,6 @@
                 <a href="{% url "home-page" %}" class="btn btn-primary btn-lg mx-2">Home Page</a>
                 <a href="{% url "music_page" %}" class="btn btn-primary btn-lg mx-2">Music Page</a>
                 <a href="{% url "profile" %}" class="btn btn-primary btn-lg mx-2">User Profile</a>
-                <p class="lead">Edit your profile information:</p>
                 <form method="post">
                     {% csrf_token %}
                     <div class="card bg-light">
@@ -30,10 +29,6 @@
                                 <label for="id_bio" class="text-secondary">Bio:</label>
                                 <textarea class="form-control" id="id_bio" rows="3" name="bio" required></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="id_is_artist" class="text-secondary">Is artist:</label>
-                                {{ form.is_artist }}
-                            </div>
                             {% if form.errors %}
                                 <ul>
                                     {% for field in form %}
@@ -43,7 +38,7 @@
                                     {% endfor %}
                                 </ul>
                             {% endif %}
-                            <button type="submit" class="btn btn-danger">Update Profile</button>
+                            <button type="submit" class="btn btn-primary">Update Profile</button>
                         </div>
                     </div>
                 </form>

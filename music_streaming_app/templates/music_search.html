@@ -4,10 +4,13 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="card bg-light shadow">
+                <h1 class="display-4 text-primary">Search for Music</h1>
+                <a href="{% url "home-page" %}" class="btn btn-primary btn-lg mx-2">Home Page</a>
+                <a href="{% url "logout" %}" class="btn btn-danger btn-lg mx-2">Logout</a>
+                <div class="card bg-light">
                     <div class="card-body">
-                        <h2 class="card-title text-primary">Search for Music</h2>
                         <form method="get" action="{% url 'music_search_results' %}">
+                            <h2 class="text-secondary">Search Criteria:</h2>
                             <div class="form-group">
                                 <label for="song_name" class="text-secondary">Song Name:</label>
                                 <input type="text" id="song_name" name="song_name" class="form-control">

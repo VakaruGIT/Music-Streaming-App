@@ -8,8 +8,7 @@
                 <a href="{% url "home-page" %}" class="btn btn-primary btn-lg mx-2">Home Page</a>
                 <a href="{% url "music_page" %}" class="btn btn-primary btn-lg mx-2">Music Page</a>
                 <a href="{% url "edit_profile_redirect" %}" class="btn btn-primary btn-lg mx-2">Edit Profile</a>
-                <p class="lead">Welcome, {{ user.username }}!</p>
-                <h2 class="text-secondary">User Information:</h2>
+                <h2 class="text-secondary">Your Information:</h2>
                 <div class="card bg-light">
                     <div class="card-body">
                         <p><strong>Username:</strong> {{ user.username }}</p>
