@@ -9,13 +9,13 @@ class User(AbstractUser):
     is_artist = models.BooleanField(default=False)
     email = models.EmailField(blank=True)
 
-    def set_password(self, password): # Hash password
+    def set_password(self, password):
         self.password = make_password(password)
 
     def __str__(self):
         return self.username
 
-    def delete(self, *args, **kwargs): # Delete all tracks by artist when artist is deleted
+    def delete(self, *args, **kwargs):
         if self.is_artist:
             MusicTrack.objects.filter(artist=self).delete()
         super().delete(*args, **kwargs)
@@ -27,10 +27,10 @@ class MusicTrack(models.Model):
     audio_file = models.FileField(upload_to='audio_files/')
     genre = models.CharField(max_length=50)
 
-    def __str__(self): # Return track title, artist name, and genre
+    def __str__(self):
         return f"{self.title} by {self.artist.name} ({self.genre})"
 
-    def delete(self, *args, **kwargs): # Delete audio file when track is deleted
+    def delete(self, *args, **kwargs):
         default_storage.delete(self.audio_file.name)
         super().delete(*args, **kwargs)
 
@@ -40,21 +40,21 @@ class Playlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='playlists')
     tracks = models.ManyToManyField(MusicTrack, related_name='playlists')
 
-    def __str__(self): # Return playlist name and user name
+    def __str__(self):
         return f"{self.name} by {self.user.name}"
 
-    def add_track(self, track): # Add track to playlist
+    def add_track(self, track):
         self.tracks.add(track)
         self.save()
 
-    def remove_track(self, track): # Remove track from playlist
+    def remove_track(self, track):
         self.tracks.remove(track)
         self.save()
 
-    def clear(self): # Clear all tracks from playlist
+    def clear(self):
         self.tracks.clear()
         self.save()
 
-    def delete(self, *args, **kwargs): # Clear all tracks from playlist when playlist is deleted
+    def delete(self, *args, **kwargs):
         self.tracks.clear()
         super().delete(*args, **kwargs)

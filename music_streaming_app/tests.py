@@ -16,7 +16,7 @@ class TestUserModel(TestCase):
 
     def test_user_password_hashing(self):
         user = User.objects.create_user(username="testuser", email="test@example.com", password="password")
-        assert user.password!= "password"  # password should be hashed
+        assert user.password != "password"  # password should be hashed
 
     def test_user_delete_cascade(self):
         user = User.objects.create_user(username="testuser", email="test@example.com", password="password")

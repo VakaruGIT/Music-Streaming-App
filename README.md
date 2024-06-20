@@ -63,6 +63,22 @@ Ctrl + C
 Deactivate
 ```
 
+If you want to delete the whole database and start from scratch use this command in the terminal
+```bash
+python manage.py migrate music_streaming_app zero
+```
+But after you have done this please be sure to create a superuser with this commands !!!!!
+```bash
+python manage.py makemigrations
+```
+```bash
+python manage.py migrate
+```
+```bash
+python manage.py createsuperuser
+```
+
+
 ## Access to the app with the following credentials
 
 account: admin
