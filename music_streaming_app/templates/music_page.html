@@ -42,7 +42,7 @@
                                 <li class="list-group-item">
                                     {{ playlist.name }}
                                     <a href="{% url 'playlist_page' playlist.id %}" class="btn btn-secondary btn-sm">View</a>
-                                    <a href="{% url 'playlist_delete' playlist.id %}" class="btn btn-danger btn-sm">Delete</a>
+                                    <a href="{% url 'delete_playlist' playlist.id %}" class="btn btn-danger btn-sm">Delete</a>
                                 </li>
                             {% empty %}
                                 <li class="list-group-item text-secondary">No playlists found.</li>

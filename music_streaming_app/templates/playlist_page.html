@@ -19,13 +19,13 @@
                                       <source src="{{ track.audio_file.url }}">
                                       Your browser does not support the audio element.
                                     </audio>
-                                </li>
+                              </li>
                             {% empty %}
                                 <li>This playlist is empty.</li>
                             {% endfor %}
                         </ul>
-                        <a href="{% url 'playlist_edit' current_playlist.id %}" class="btn btn-secondary btn-sm">Edit</a>
-                        <a href="{% url 'playlist_delete' current_playlist.id %}" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="{% url 'edit_playlist' current_playlist.id %}" class="btn btn-secondary btn-sm">Edit</a>
+                        <a href="{% url 'delete_playlist' current_playlist.id %}" class="btn btn-danger btn-sm">Delete</a>
                     </div>
                 </div>
             </div>

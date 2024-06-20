@@ -37,7 +37,7 @@ by Andrei-Flavius Văcaru
 - See music
 
 
-### How to run the app (in the terminal)
+### How to run the app (in the terminal) DEBUG IS SET TO FALSE
 1. First create a virtual environment
 ```bash
 python -m venv .venv 
@@ -79,3 +79,5 @@ password: artistpassword
 
 account: artist2
 password: artistpassword
+
+I put some music in the songs_to_choose directory, so you can listen and play to it. Enjoy! :D

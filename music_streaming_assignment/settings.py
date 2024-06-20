@@ -25,7 +25,7 @@ SECRET_KEY = 'v3^*6p7ede#ke@q$9c-cui@f7c%5^6&yd2=ho24k4$1f&cg+yy'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ["*"] # Read on the internet, this is not safe :(
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -120,9 +120,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
 
-
-AUTH_USER_MODEL = 'music_streaming_app.User'
+AUTH_USER_MODEL = "music_streaming_app.User"
 
