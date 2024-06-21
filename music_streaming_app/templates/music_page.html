@@ -12,9 +12,9 @@
                         {% if user.is_authenticated and user.is_artist %}
                             <a href="{% url 'music_upload' %}" class="btn btn-primary btn-lg mx-2 mb-3">Upload Song</a>
                         {% endif %}
-                        <a href="{% url 'home-page' %}" class="btn btn-secondary btn-lg mx-2 mb-3">Home</a>
-                        <a href="{% url 'music_search' %}" class="btn btn-secondary btn-lg mx-2 mb-3">Search Songs</a>
-                        <a href="{% url 'playlists_page' %}" class="btn btn-secondary btn-lg mx-2 mb-3">View Playlists</a>
+                        <a href="{% url "home-page" %}" class="btn btn-secondary btn-lg mx-2 mb-3">Home</a>
+                        <a href="{% url "music_search" %}" class="btn btn-secondary btn-lg mx-2 mb-3">Search Songs</a>
+                        <a href="{% url "playlists_page" %}" class="btn btn-secondary btn-lg mx-2 mb-3">View Playlists</a>
 
                         <h2 class="text-secondary">All Songs:</h2>
                         <ul class="list-group">
@@ -34,15 +34,13 @@
                                 <li class="list-group-item text-secondary">No songs found.</li>
                             {% endfor %}
                         </ul>
-
-                        <!-- Display playlists and add a delete button -->
                         <h2 class="text-secondary">My Playlists:</h2>
                         <ul class="list-group">
                             {% for playlist in playlists %}
                                 <li class="list-group-item">
                                     {{ playlist.name }}
                                     <a href="{% url 'playlist_page' playlist.id %}" class="btn btn-secondary btn-sm">View</a>
-                                    <a href="{% url 'delete_playlist' playlist.id %}" class="btn btn-danger btn-sm">Delete</a>
+                                    <a href="{% url "delete_playlist" playlist.id %}" class="btn btn-danger btn-sm">Delete</a>
                                 </li>
                             {% empty %}
                                 <li class="list-group-item text-secondary">No playlists found.</li>

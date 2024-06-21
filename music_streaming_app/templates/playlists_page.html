@@ -23,13 +23,13 @@
                                                 <li>{{ song.title }} by {{ song.artist.name }} ({{ song.genre }})</li>
                                             {% endfor %}
                                         </ul>
-                                        <a href="{% url 'playlist_page' playlist.id %}" class="btn btn-primary btn-sm">View Playlist</a>
-                                        <a href="{% url 'edit_playlist' playlist.id %}" class="btn btn-secondary btn-sm">Edit</a>
-                                        <a href="{% url 'delete_playlist' playlist.id %}" class="btn btn-danger btn-sm">Delete</a>
+                                        <a href="{% url "playlist_page" playlist.id %}" class="btn btn-primary btn-sm">View Playlist</a>
+                                        <a href="{% url "edit_playlist" playlist.id %}" class="btn btn-secondary btn-sm">Edit</a>
+                                        <a href="{% url "delete_playlist" playlist.id %}" class="btn btn-danger btn-sm">Delete</a>
                                     </li>
                               {% endfor %}
                             </ul>
-                            <a href="{% url 'create_playlist' %}" class="btn btn-primary btn-lg">Create New Playlist</a>
+                            <a href="{% url "create_playlist" %}" class="btn btn-primary btn-lg">Create New Playlist</a>
                         {% endif %}
                     </div>
                 </div>

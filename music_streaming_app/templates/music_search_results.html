@@ -20,8 +20,8 @@
                                           Your browser does not support the audio element.
                                         </audio>
                                         {% if song.artist == request.user %}
-                                            <a href="{% url 'music_edit' song.id %}" class="btn btn-secondary btn-sm">Edit</a>
-                                            <a href="{% url 'music_delete' song.id %}" class="btn btn-danger btn-sm">Delete</a>
+                                            <a href="{% url "music_edit" song.id %}" class="btn btn-secondary btn-sm">Edit</a>
+                                            <a href="{% url "music_delete" song.id %}" class="btn btn-danger btn-sm">Delete</a>
                                         {% endif %}
                                     </li>
                                 {% endfor %}
